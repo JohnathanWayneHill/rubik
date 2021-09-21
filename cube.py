@@ -6,10 +6,13 @@
 ~ TODO: Raise erro in rotate_face if unacceptable "target" given
 """
 
+<<<<<<< HEAD
 
 
 import numpy as np
 
+=======
+>>>>>>> parent of 8b6d9dd (added documentation to cube class)
 class Cube: 
     def __init__(self): 
         

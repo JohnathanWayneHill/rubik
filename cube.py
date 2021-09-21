@@ -11,30 +11,12 @@
 import numpy as np
 
 class Cube: 
-    """
-    A class used to represent an Rubik's Cube 
-       TODO: more here 
-
-    ...
-
-    Attributes
-    ----------
-    row : int
-        TODO: more here
-    
-
-    Methods
-    -------
-    extract_edge: 
-        TODO: more here
-    """
     def __init__(self): 
-        # codings for rows and columns 
+        
         self.row = 0
         self.col = 1
         
         # todo: list of tuples? 
-        # TODO: double-check that order is correct as well as (axis,index) pairs
         self.edge = { "R": 
                             {"B": (self.col, 0), "D": (self.col, 2), 
                              "F": (self.col, 2), "U": (self.col, 2),
@@ -68,74 +50,34 @@ class Cube:
         self.cube = {face:np.full((3,3),index) for index, face in enumerate(self.faces)}
 
                 
-    def extract_edge(self, target: str, touching_edges: "np.array((4,3))", 
-                         assignrow: str, assigncol: str) -> "np.array((4,3))":
-        """Gets and prints the spreadsheet's header columns
-    
-        Parameters
-        ----------
-        target : str
-            The target face we are intending to rotate.
-        touching_edges : np.array((4,3),...)
-            Numpy array that we are either updating or using to update. 
-        assignrow: str
-            String that will be evaluated as code using exec to assign from
-                one array to another.
-        assigncol: str
-            String that will be evaluated as code using exec to assign from
-                one array to another.
-    
-        Returns
-        -------
-        numpy
-            a list of strings used that are the header columns
-        """
+    def extract_edge(self, target, touching_edges, assignrow, assigncol):
         
-        # iterate through order of rows 
         for index, face in enumerate(self.edge[target]["order"]):
-            axis = self.edge[target][face][0] # 0 for row, 1 for col
-            touching = self.edge[target].keys() # list of touching edges
+            axis = self.edge[target][face][0]
+            touching = self.edge[target].keys()
             
-            # if current face touching target face and row touching
             if face in touching and axis == self.row:
-                    # row number of target edge to extract
                     row_num = self.edge[target][face][1]
-                    exec(assignrow) # assigned row
-            
-            # if current face touching target and col touching
+                    exec(assignrow)
+                    
             elif face in touching: 
-                    # col number of target edge to extract
                     col_num = self.edge[target][face][1]
-                    exec(assigncol) # assigned column
+                    exec(assigncol)
                     
         return touching_edges
     
-    def rotate_face(self, target: str) -> None:
-        """Gets and prints the spreadsheet's header columns
-    
-        Parameters
-        ----------
-        target : str
-            The target face we are intending to rotate.
-
-        """
+    def rotate_face(self, target):
         # placeholder for values in edges touching target face
         touching_edges_placeholder = np.full((4,3),0)
-        
         # updating array for values in edges touching target face
-        touching_edges = self.extract_edge(target, # target face
-                    touching_edges_placeholder, # array of edges to re-assign
-                    #assignment operations
+        touching_edges = self.extract_edge(target, touching_edges_placeholder,
                     "touching_edges[index] = self.cube[face][row_num]", 
                     "touching_edges[index] = self.cube[face][:,col_num]")
         
         # roll (rotate) edges in temporary array
         touching_edges_rotated = np.roll(touching_edges, 3)
-        
         # update temporary (rotated) array for edges touching target face
-        self.extract_edge(target, # target face
-                    touching_edges_rotated, # array of edges to re-assign 
-                    # assignment operations 
+        self.extract_edge(target, touching_edges_rotated,
                     "self.cube[face][row_num] = touching_edges[index]", 
                     "self.cube[face][:,col_num] = touching_edges[index]")
         

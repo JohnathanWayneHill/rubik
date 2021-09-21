@@ -1,3 +1,13 @@
+"""
+~ TODO: Refactor and clean-up!!!!! 
+~ TODO: Need to sanity check edge. 
+~ TODO: Write TEST cases. 
+~ TODO: Write SCRAMBLE method. 
+~ TODO: Raise erro in rotate_face if unacceptable "target" given
+"""
+
+
+
 import numpy as np
 
 class Cube: 

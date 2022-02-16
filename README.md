@@ -18,3 +18,5 @@ To use:
 3) `cube.rotate('F*')` to rotate 'F' counterclockwise. 
 
 4) `cube.solve()` to undo all rotations. 
+
+5) `cube.scramble(5)` rotate 5 random faces in random directions. 

@@ -11,7 +11,7 @@ import time
 
 class Cube:
     """
-    A class used to represent an Rubik's Cube 
+    A class used to represent a Rubik's Cube 
        TODO: more here 
 
     ...

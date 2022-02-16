@@ -8,12 +8,12 @@ To use:
 1) `python -i cube.py` 
 
 2) `cube.rotate('F')` to rotate face 'F' clockwise: 
-~ 'F' for front face
-~ 'B' for back face
-~ 'U' for "up" face
-~ 'D' for "down" face
-~ 'L' for left face
-~ 'R' for right face 
+- 'F' for front face
+- 'B' for back face
+- 'U' for "up" face
+- 'D' for "down" face
+- 'L' for left face
+- 'R' for right face 
 
 3) `cube.rotate('F*')` to rotate 'F' counterclockwise. 
 
